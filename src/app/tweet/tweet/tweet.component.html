@@ -1,0 +1,57 @@
+<mat-card>
+
+  <mat-toolbar color="warn">Tweets</mat-toolbar>
+
+
+  <div *ngIf="tweets$ | async as tweets; else loading">
+
+<mat-table [dataSource]="tweets" class="mat-elevation-z8">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let tweets">{{ tweets.name }}
+      <mat-icon aria-hidden="false" aria-label="Categoria do Curso">person</mat-icon>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Category Column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let tweets">{{ tweets.email }}
+
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="tweet">
+    <mat-header-cell *matHeaderCellDef>Tweet</mat-header-cell>
+    <mat-cell *matCellDef="let tweets">{{ tweets.tweet }}
+
+    </mat-cell>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="crud-tweet">
+    <mat-header-cell *matHeaderCellDef class="action-column">
+      <button mat-mini-fab color="accent" aria-label="crud">
+        <mat-icon (click)="onAdd()">add</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" aria-label="crud">
+        <mat-icon (click)="onDelete()">delete</mat-icon>
+      </button>
+    </mat-header-cell>
+
+
+
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+  </div>
+
+  <ng-template #loading>
+    <div class="spinner">
+    <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+</mat-card>
